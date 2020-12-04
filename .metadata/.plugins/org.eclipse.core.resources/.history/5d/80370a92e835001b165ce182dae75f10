@@ -77,24 +77,28 @@ public class Servidor extends JFrame {
 				System.out.println("\t\t"+message);
 			
 				if(message.equals("Conectar")) {
-					try {
-						Class.forName(jdbcDriver);
-				        System.out.println("Driver cargado");
-					} 
-					catch (ClassNotFoundException ex) {
-				        System.out.println("Driver fallo");
-				        System.out.println(ex.getMessage());
-				    }
-				    try {
-				    	//connecting to xampp server (Apache Server)
-				        conn = DriverManager.getConnection(serverUrl, username, password);
-				        System.out.println("Conectado a la base de datos correctamente");
-				    } 
-				    catch (SQLException ex) {
-				    	System.out.println("Fallo en la conexion a la base de datos");
-				        System.out.println(ex.getMessage());
-				    }
+					 try {
+						    Class.forName(jdbcDriver);
+				            System.out.println("Driver Loaded");
+				        } catch (ClassNotFoundException ex) {
+				            System.out.println("Driver Failed To Load");
+				            System.out.println(ex.getMessage());
+				        }
+				        try {
+				            //connecting to xampp server (Apache Server)
+				            conn = DriverManager.getConnection(serverUrl, username, password);
+				            System.out.println("Connected To Server Successfully");
+				        } catch (SQLException ex) {
+				            System.out.println("Failed To Connect To Server Successfully");
+				            System.out.println(ex.getMessage());
+				 
+				        }
+					
+					
 				}
+				
+
+				
 				
 				/*
 				inputStreamReader.close();

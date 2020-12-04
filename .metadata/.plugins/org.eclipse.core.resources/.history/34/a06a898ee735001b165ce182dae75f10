@@ -30,11 +30,11 @@ public class Servidor extends JFrame {
 	
 	
 	
-	 static String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-     static Connection conn = null;
-     static String username = "root";
-     static String password = "";
-     static String serverUrl = "jdbc:mysql://localhost:3306/";
+	 String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+     Connection conn = null;
+     String username = "root";
+     String password = "";
+     String serverUrl = "jdbc:mysql://localhost:3306/?useUnicode=true&amp;amp;amp;useJDBCCompliantTimezoneShift=true&amp;amp;amp;useLegacyDatetimeCode=false&amp;amp;amp;serverTimezone=UTC";
      Statement stmt = null;
      String dbName = "test";
      String checkDb = "SELECT SCHEMA_NAME FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME` = '" + dbName + "'";
@@ -52,7 +52,9 @@ public class Servidor extends JFrame {
 				try {
 					Servidor frame = new Servidor();
 					frame.setVisible(true);
-												
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,41 +62,56 @@ public class Servidor extends JFrame {
 		});
 		
 		
+		 try {
+	            //check jdbc driver (mysql connector / j). Make sure the connector is configured correctly (added to libraries) before checking it.
+	            Class.forName(jdbcDriver);
+	            System.out.println("Driver Loaded");
+	        } catch (ClassNotFoundException ex) {
+	            System.out.println("Driver Failed To Load");
+	            System.out.println(ex.getMessage());
+	        }
+		 
+		/*
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		final String url = "jdbc:mysql://test";
+	    final String user = "root";
+	    final String password = "";
+	      
+	    Connection con = DriverManager.getConnection(url, user, password);
+
+	      // display status message
+	      if (con == null) {
+	         System.out.println("JDBC connection is not established");
+	         return;
+	      } else
+	         System.out.println("Congratulations," + 
+	              " JDBC connection is established successfully.\n");
+
+	      // close JDBC connection
+	      con.close();
+		*/
+		/*
 		try {
+		
+
 			serverSocket = new ServerSocket(7000);
 			while(true) {
-		
 				System.out.println("Servidor corriendo ");
 
 				socket = serverSocket.accept();
 				
-				System.out.println("\tServidor corriendo por el puerto 7000");
+				System.out.println("Servidor corriendo por el puerto 7000");
 				
 				inputStreamReader = new InputStreamReader(socket.getInputStream());
 				bufferedReader = new BufferedReader(inputStreamReader);
 				message = bufferedReader.readLine();
 				
-				System.out.println("\t\t"+message);
-			
-				if(message.equals("Conectar")) {
-					try {
-						Class.forName(jdbcDriver);
-				        System.out.println("Driver cargado");
-					} 
-					catch (ClassNotFoundException ex) {
-				        System.out.println("Driver fallo");
-				        System.out.println(ex.getMessage());
-				    }
-				    try {
-				    	//connecting to xampp server (Apache Server)
-				        conn = DriverManager.getConnection(serverUrl, username, password);
-				        System.out.println("Conectado a la base de datos correctamente");
-				    } 
-				    catch (SQLException ex) {
-				    	System.out.println("Fallo en la conexion a la base de datos");
-				        System.out.println(ex.getMessage());
-				    }
-				}
+				System.out.println(message);
+				
+				
+
+				
 				
 				/*
 				inputStreamReader.close();
@@ -102,14 +119,14 @@ public class Servidor extends JFrame {
 				serverSocket.close();
 				socket.close();
 				*/
-	      
+	      /*
 			}
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		
+		*/
 		
 	}
 

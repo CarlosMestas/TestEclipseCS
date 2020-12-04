@@ -52,7 +52,9 @@ public class Servidor extends JFrame {
 				try {
 					Servidor frame = new Servidor();
 					frame.setVisible(true);
-												
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,41 +62,28 @@ public class Servidor extends JFrame {
 		});
 		
 		
+
+		
 		try {
+		
+
 			serverSocket = new ServerSocket(7000);
 			while(true) {
-		
 				System.out.println("Servidor corriendo ");
 
 				socket = serverSocket.accept();
 				
-				System.out.println("\tServidor corriendo por el puerto 7000");
+				System.out.println("Servidor corriendo por el puerto 7000");
 				
 				inputStreamReader = new InputStreamReader(socket.getInputStream());
 				bufferedReader = new BufferedReader(inputStreamReader);
 				message = bufferedReader.readLine();
 				
-				System.out.println("\t\t"+message);
-			
-				if(message.equals("Conectar")) {
-					try {
-						Class.forName(jdbcDriver);
-				        System.out.println("Driver cargado");
-					} 
-					catch (ClassNotFoundException ex) {
-				        System.out.println("Driver fallo");
-				        System.out.println(ex.getMessage());
-				    }
-				    try {
-				    	//connecting to xampp server (Apache Server)
-				        conn = DriverManager.getConnection(serverUrl, username, password);
-				        System.out.println("Conectado a la base de datos correctamente");
-				    } 
-				    catch (SQLException ex) {
-				    	System.out.println("Fallo en la conexion a la base de datos");
-				        System.out.println(ex.getMessage());
-				    }
-				}
+				System.out.println(message);
+				
+				
+
+				
 				
 				/*
 				inputStreamReader.close();
